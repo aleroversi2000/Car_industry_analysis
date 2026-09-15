@@ -7,7 +7,7 @@ attributes actually predict purchase behaviour.
 
 **[Download the Tableau workbook (.twb)](Car_sales.twb)**
 
-![Dashboard overview](screenshots/dashboard.png)
+![Dashboard overview]()
 
 ---
 
@@ -19,12 +19,6 @@ period, visible as a crossover in the cumulative revenue chart.
 **Revenue is concentrated in domestic brands.** Chevrolet, Ford and Dodge
 together account for a disproportionate share of the top-10 total, ahead of
 premium imports.
-
-**Buyer income does not predict purchase price.** Plotting average annual
-income against average sale price by brand produces no meaningful relationship
-(near-zero slope, wide vertical dispersion at every price point). This is a
-negative result worth stating: income-based segmentation would not work on this
-dataset, and the field is likely synthetic.
 
 **Revenue is male-skewed**, with roughly a 79/21 split — the single largest
 demographic asymmetry in the data.
@@ -62,20 +56,17 @@ Techniques used:
 
 ---
 
-## Data preparation
+## Data cleaning and preparation
 
-Three issues were identified and handled before building:
+Performed in `Car_sales.ipynb` with pandas.
 
-**Encoding defect in `Engine`** — values decoded as `DoubleÂ Overhead
-Camshaft`, a mis-read UTF-8 non-breaking space. Cleaned before use.
-
-**`Phone` typed as a numeric measure** — Tableau computed a mean and standard
-deviation for it. Recast as a string; it is an identifier, not a quantity.
-
-**Ambiguous city names in `Dealer Region`** — Middletown, Aurora and
-Greenville exist in multiple US states, and the dataset carries no state
-field. Mapping was therefore ruled out in favour of a ranked bar chart, which
-conveys the same comparison without implying false geographic precision.
-
-A single null in `Customer Name` was left in place: the field is an identifier
-and is not aggregated anywhere in the workbook.
+- **Integrity:** 23,906 rows × 16 columns, zero exact duplicates.
+- **Missing values:** one null in `Customer Name`, filled with `'Unknown'`
+  rather than dropped — the field is an identifier and never aggregated, so
+  discarding the row would have lost 15 valid attributes to fix one.
+- **Scope check:** `Dealer_Region` inspected for distinct values, confirming
+  seven US locations with no variant spellings.
+- **Distributions:** `Annual Income` is strongly right-skewed (max three orders
+  of magnitude above min), which drove the use of log scales downstream.
+- **Relationship test:** price vs. income plotted with low opacity and a log
+  y-axis to handle overplotting. No significant relationship.  
