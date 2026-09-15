@@ -7,7 +7,7 @@ attributes actually predict purchase behaviour.
 
 **[Download the Tableau workbook (.twb)](Car_sales.twb)**
 
-![Dashboard overview]()
+![Dashboard overview](Car_sales_screenshot.png)
 
 ---
 
