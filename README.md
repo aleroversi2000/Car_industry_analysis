@@ -5,7 +5,7 @@ seven US dealer regions, built to answer four business questions: what drives
 revenue, where it comes from, how it moves over time, and which buyer
 attributes actually predict purchase behaviour.
 
-**[Download the Tableau workbook (.twb)](Car_sales.twb)**
+Here is a preview of the dashboard:
 
 ![Dashboard overview](Car_sales_screenshot.png)
 
